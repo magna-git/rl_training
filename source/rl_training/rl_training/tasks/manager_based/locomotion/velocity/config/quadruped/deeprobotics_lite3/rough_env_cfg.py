@@ -130,11 +130,11 @@ class DeeproboticsLite3RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.rewards.contact_forces.weight = -1e-1 # -2e-2
         self.rewards.contact_forces.params["sensor_cfg"].body_names = [self.foot_link_name]
 
-        self.rewards.lin_vel_z_l2.weight = -2.0 #-2.0
+        self.rewards.lin_vel_z_l2.weight = -1.0 #-2.0
         self.rewards.ang_vel_xy_l2.weight = -0.05 # -0.05
 
-        self.rewards.track_lin_vel_xy_exp.weight = 3.0
-        self.rewards.track_ang_vel_z_exp.weight = 1.5
+        self.rewards.track_lin_vel_xy_exp.weight = 4.0
+        self.rewards.track_ang_vel_z_exp.weight = 1.5 
 
         self.rewards.undesired_contacts.weight = -0.5
         self.rewards.undesired_contacts.params["sensor_cfg"].body_names = [f"^(?!.*{self.foot_link_name}).*"]
@@ -147,7 +147,7 @@ class DeeproboticsLite3RoughEnvCfg(LocomotionVelocityRoughEnvCfg):
         self.rewards.flat_orientation_l2.weight = -5.0
 
         # add the following rewards to improve the gait
-        self.rewards.feet_gait.weight = 0.5
+        self.rewards.feet_gait.weight = 0.8
         self.rewards.feet_gait.params["synced_feet_pair_names"] = [
             ["FL_FOOT", "HR_FOOT"],
             ["FR_FOOT", "HL_FOOT"]
