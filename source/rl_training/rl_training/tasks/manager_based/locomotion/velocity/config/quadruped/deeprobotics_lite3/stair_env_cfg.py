@@ -20,11 +20,11 @@ class DeeproboticsLite3StairEnvCfg(DeeproboticsLite3RoughEnvCfg):
         self.rewards.lin_vel_z_l2.weight = -1.0            # était -2.0 (corps peut monter)
         self.rewards.ang_vel_xy_l2.weight = -0.025          # était -0.05 (corps peut s'incliner)
         self.rewards.flat_orientation_l2.weight = -3.7       # était -5.0 (dos peut être incliné)
-        self.rewards.feet_height.params["target_height"] = 0.12  # était 0.10 → CHANGÉ
+        self.rewards.feet_height.params["target_height"] = 0.17  # était 0.10 → CHANGÉ
         self.rewards.feet_air_time.params["threshold"] = 0.55    # était 0.5
         self.rewards.feet_gait.weight = 1.0            # était 0.5 (doubler)
         self.rewards.joint_mirror.weight = -0.15        # était -0.05 (tripler la pénalité)
-        self.rewards.feet_air_time_variance.weight = -12.0   # était -8.0 → CHANGÉ
+        self.rewards.feet_air_time_variance.weight = -11.0   # était -8.0 → CHANGÉ
 
         # ------------------------------ Commands : vitesse prudente --------------------------------
         self.commands.base_velocity.ranges.lin_vel_x = (0.0, 0.8)
