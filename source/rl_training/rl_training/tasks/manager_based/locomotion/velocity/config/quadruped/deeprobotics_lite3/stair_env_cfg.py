@@ -20,17 +20,21 @@ class DeeproboticsLite3StairEnvCfg(DeeproboticsLite3RoughEnvCfg):
         self.rewards.lin_vel_z_l2.weight = -2            # était -2.0 (corps peut monter)
         self.rewards.ang_vel_xy_l2.weight = -0.01         # était -0.05 (corps peut s'incliner)
         self.rewards.flat_orientation_l2.weight = -2.5       # était -3.7 (dos peut être incliné)
-        self.rewards.feet_height.params["target_height"] = 0.17  # était 0.10 → CHANGÉ
+        self.rewards.feet_height.params["target_height"] = 0.16  # était 0.10 → CHANGÉ
         self.rewards.feet_air_time.params["threshold"] = 0.55    # était 0.5
         self.rewards.feet_gait.weight = 1.0            # était 0.5 (doubler)
         self.rewards.joint_mirror.weight = -0.08        # était -0.05 (tripler la pénalité)
         self.rewards.feet_air_time_variance.weight = 0.0   # était -8.0 → CHANGÉ was 0
+         # Anti-stumble : pénalise les pieds qui tapent les marches de face
+        self.rewards.feet_stumble.weight = -0.2
+        self.rewards.feet_stumble.params["sensor_cfg"].body_names = [self.foot_link_name]
 
         # ------------------------------ Commands : vitesse prudente --------------------------------
-        self.commands.base_velocity.ranges.lin_vel_x = (0.0, 1.5)
+        self.commands.base_velocity.ranges.lin_vel_x = (0.0, 0.8)
         self.commands.base_velocity.ranges.lin_vel_y = (-0.5, 0.5)
         self.commands.base_velocity.ranges.ang_vel_z = (-0.3, 0.3)
-
+          
+       
         # ------------------------------ Disable zero rewards --------------------------------------
         if self.__class__.__name__ == "DeeproboticsLite3StairEnvCfg":
             self.disable_zero_weight_rewards()
