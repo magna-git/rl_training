@@ -9,11 +9,11 @@ class DeeproboticsLite3StairEnvCfg(DeeproboticsLite3RoughEnvCfg):
         super().__post_init__()
 
         # ------------------------------ Terrains : majorité escaliers ------------------------------
-        self.scene.terrain.terrain_generator.sub_terrains["random_rough"].proportion = 0.35
+        self.scene.terrain.terrain_generator.sub_terrains["random_rough"].proportion = 0.30
         self.scene.terrain.terrain_generator.sub_terrains["hf_pyramid_slope"].proportion = 0.05
         self.scene.terrain.terrain_generator.sub_terrains["hf_pyramid_slope_inv"].proportion = 0.00
         self.scene.terrain.terrain_generator.sub_terrains["boxes"].proportion = 0.0
-        self.scene.terrain.terrain_generator.sub_terrains["pyramid_stairs"].proportion = 0.50
+        self.scene.terrain.terrain_generator.sub_terrains["pyramid_stairs"].proportion = 0.55 # c''etait a 50 avant 
         self.scene.terrain.terrain_generator.sub_terrains["pyramid_stairs_inv"].proportion = 0.10
 
         # ------------------------------ Rewards : escalier focused ------------------------------
@@ -24,14 +24,18 @@ class DeeproboticsLite3StairEnvCfg(DeeproboticsLite3RoughEnvCfg):
         self.rewards.feet_air_time.params["threshold"] = 0.55
         self.rewards.feet_gait.weight = 1.0                  # forcer trot diagonal
         self.rewards.joint_mirror.weight = -0.05             # symétrie souple
-        self.rewards.feet_air_time_variance.weight = -0.0    # rythme libre
+        self.rewards.feet_air_time_variance.weight = 0.0    # rythme libre
+        self.rewards.base_height_l2.weight = -15.0 # j'ai changer egalement ses deux -10 
+        self.rewards.base_height_l2.params["target_height"] = 0.37
+
+
 
         # Anti-stumble : pénalise les pieds qui tapent les marches
         self.rewards.feet_stumble.weight = -0.2
         self.rewards.feet_stumble.params["sensor_cfg"].body_names = [self.foot_link_name]
 
         # ------------------------------ Commands : vitesse prudente --------------------------------
-        self.commands.base_velocity.ranges.lin_vel_x = (0.0, 0.8)
+        self.commands.base_velocity.ranges.lin_vel_x = (0.0, 0.7)
         self.commands.base_velocity.ranges.lin_vel_y = (-0.3, 0.3)
         self.commands.base_velocity.ranges.ang_vel_z = (-0.3, 0.3)
 
