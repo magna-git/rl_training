@@ -9,12 +9,12 @@ class DeeproboticsLite3StairEnvCfg(DeeproboticsLite3RoughEnvCfg):
         super().__post_init__()
 
         # ------------------------------ Terrains : majorité escaliers ------------------------------
-        self.scene.terrain.terrain_generator.sub_terrains["random_rough"].proportion = 0.30
+        self.scene.terrain.terrain_generator.sub_terrains["random_rough"].proportion = 0.25
         self.scene.terrain.terrain_generator.sub_terrains["hf_pyramid_slope"].proportion = 0.05
         self.scene.terrain.terrain_generator.sub_terrains["hf_pyramid_slope_inv"].proportion = 0.00
         self.scene.terrain.terrain_generator.sub_terrains["boxes"].proportion = 0.0
         self.scene.terrain.terrain_generator.sub_terrains["pyramid_stairs"].proportion = 0.45
-        self.scene.terrain.terrain_generator.sub_terrains["pyramid_stairs_inv"].proportion = 0.20
+        self.scene.terrain.terrain_generator.sub_terrains["pyramid_stairs_inv"].proportion = 0.25
 
         # ------------------------------ Rewards : escalier focused ------------------------------
         self.rewards.lin_vel_z_l2.weight = -2.5           # corps peut monter
